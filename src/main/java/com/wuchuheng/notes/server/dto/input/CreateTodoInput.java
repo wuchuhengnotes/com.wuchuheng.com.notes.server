@@ -13,18 +13,15 @@ import graphql.annotations.annotationTypes.GraphQLConstructor;
 import graphql.annotations.annotationTypes.GraphQLDescription;
 import graphql.annotations.annotationTypes.GraphQLField;
 import graphql.annotations.annotationTypes.GraphQLNonNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 
-@Getter
 @NoArgsConstructor
 @AllArgsConstructor(onConstructor_ = @GraphQLConstructor)
 @GraphQLDescription("The input for creating Todo.")
-@Setter
+@Data
+@Builder
 public class CreateTodoInput {
     @GraphQLField
     @GraphQLNonNull

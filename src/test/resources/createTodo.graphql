@@ -1,0 +1,10 @@
+mutation CREATE_TODO($input: InputCreateTodoInput!){
+    createTodo(input: $input) {
+        id
+        title
+        done
+        createdAt
+        doneAt
+
+    }
+}
