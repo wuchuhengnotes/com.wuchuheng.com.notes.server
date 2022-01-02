@@ -48,7 +48,7 @@ public class Todo {
     @GraphQLDescription("Creation time.")
     @GraphQLNonNull
     @GraphQLField
-    private LocalDate createdAt = LocalDate.now();
+    private LocalDate createdAt;
 
     @Column(columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
     @JsonIgnore

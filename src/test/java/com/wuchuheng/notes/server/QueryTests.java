@@ -9,6 +9,7 @@
 package com.wuchuheng.notes.server;
 
 import com.graphql.spring.boot.test.GraphQLTestTemplate;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Testing the Query for GraphQL")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class QueryTests {
+@Slf4j
+class QueryTests {
     private static final String HELLO_DATA_FIELD = "$.data.hello";
     private static final String HELLO_GRAPHQL_RESOURCE = "hello.graphql";
 
@@ -29,8 +31,8 @@ public class QueryTests {
     @Test
     @DisplayName("Should work without parameter, returning \"Hello, World!\"")
     void testHello() throws IOException {
-        final String actual = graphQLTestTemplate.postForResource(HELLO_GRAPHQL_RESOURCE)
-                .get(HELLO_DATA_FIELD);
+        log.info("Query hello.");
+        final String actual = graphQLTestTemplate.postForResource(HELLO_GRAPHQL_RESOURCE).get(HELLO_DATA_FIELD);
         assertThat(actual).isEqualTo("Hello, World!");
     }
 }

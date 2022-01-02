@@ -27,13 +27,7 @@ public class QueryResolver {
     @GraphQLField
     @GraphQLNonNull
     @GraphQLDescription("Hello world!")
-    public static Todo hello() {
-        return Todo.builder()
-                .id(1L)
-                .doneAt(LocalDate.now())
-                .createdAt(LocalDate.now())
-                .isDone(true)
-                .title("hello")
-                .build();
+    public static String hello() {
+        return "Hello, World!";
     }
 }
