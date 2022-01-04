@@ -9,6 +9,7 @@
 package com.wuchuheng.notes.server.resolvers;
 
 import com.wuchuheng.notes.server.dto.input.CreateTodoInput;
+import com.wuchuheng.notes.server.dto.input.UpdateTodoInput;
 import com.wuchuheng.notes.server.model.Todo;
 import com.wuchuheng.notes.server.services.TodoService;
 import graphql.annotations.annotationTypes.GraphQLDescription;
@@ -36,6 +37,13 @@ public class MutationResolver implements ApplicationContextAware {
             final @GraphQLNonNull CreateTodoInput input
             ) {
         return todoService.createTodo(input);
+    }
+
+    @GraphQLField
+    @GraphQLNonNull
+    @GraphQLDescription("Updating a Todo.")
+    public static Todo updateTodo( final @GraphQLNonNull UpdateTodoInput input ) {
+        return todoService.updateTodo(input);
     }
 
     @Override

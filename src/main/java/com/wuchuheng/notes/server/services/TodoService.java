@@ -9,15 +9,16 @@
 package com.wuchuheng.notes.server.services;
 
 import com.wuchuheng.notes.server.dto.input.CreateTodoInput;
+import com.wuchuheng.notes.server.dto.input.UpdateTodoInput;
 import com.wuchuheng.notes.server.model.Todo;
 import com.wuchuheng.notes.server.repository.TodoRepository;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Service
 @Validated
@@ -35,5 +36,13 @@ public class TodoService {
         );
 
         return todoRecord;
+    }
+
+    public Todo updateTodo(@Valid UpdateTodoInput input) {
+        final Todo todo = this.todoRepository.findById(input.getId().longValue());
+        todo.setTitle(input.getTitle());
+        this.todoRepository.save(todo);
+
+        return todo;
     }
 }

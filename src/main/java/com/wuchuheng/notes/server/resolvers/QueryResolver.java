@@ -8,7 +8,6 @@
 
 package com.wuchuheng.notes.server.resolvers;
 
-import com.wuchuheng.notes.server.model.Todo;
 import graphql.annotations.annotationTypes.GraphQLDescription;
 import graphql.annotations.annotationTypes.GraphQLField;
 import graphql.annotations.annotationTypes.GraphQLNonNull;
@@ -16,8 +15,6 @@ import graphql.kickstart.annotations.GraphQLQueryResolver;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-
-import java.time.LocalDate;
 
 @Component
 @Slf4j

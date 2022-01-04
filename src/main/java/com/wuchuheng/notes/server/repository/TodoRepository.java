@@ -9,8 +9,10 @@
 package com.wuchuheng.notes.server.repository;
 
 import com.wuchuheng.notes.server.model.Todo;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
-public interface TodoRepository extends JpaRepository<Todo, Long> {
+import java.util.Optional;
 
+public interface TodoRepository extends CrudRepository<Todo, Long> {
+    Todo findById(long id);
 }
