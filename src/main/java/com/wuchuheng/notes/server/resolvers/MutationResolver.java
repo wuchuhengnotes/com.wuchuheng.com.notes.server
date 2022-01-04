@@ -33,9 +33,7 @@ public class MutationResolver implements ApplicationContextAware {
     @GraphQLField
     @GraphQLNonNull
     @GraphQLDescription("Creating a Todo.")
-    public static Todo createTodo(
-            final @GraphQLNonNull CreateTodoInput input
-            ) {
+    public static Todo createTodo( final @GraphQLNonNull CreateTodoInput input ) {
         return todoService.createTodo(input);
     }
 

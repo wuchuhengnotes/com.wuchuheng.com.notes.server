@@ -8,23 +8,43 @@
 
 package com.wuchuheng.notes.server.resolvers;
 
+import com.wuchuheng.notes.server.model.Todo;
+import com.wuchuheng.notes.server.repository.TodoRepository;
+import com.wuchuheng.notes.server.services.TodoService;
 import graphql.annotations.annotationTypes.GraphQLDescription;
 import graphql.annotations.annotationTypes.GraphQLField;
 import graphql.annotations.annotationTypes.GraphQLNonNull;
 import graphql.kickstart.annotations.GraphQLQueryResolver;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
-@Component
 @Slf4j
 @GraphQLQueryResolver
 @NoArgsConstructor
-public class QueryResolver {
+@Component
+public class QueryResolver implements ApplicationContextAware {
+    private static TodoRepository todoRepository;
+
     @GraphQLField
     @GraphQLNonNull
     @GraphQLDescription("Hello world!")
     public static String hello() {
         return "Hello, World!";
+    }
+
+    @GraphQLField
+    @GraphQLNonNull
+    @GraphQLDescription("Returns all todos.")
+    public static Iterable<Todo> todos() {
+        return todoRepository.findAll();
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        todoRepository = applicationContext.getBean(TodoRepository.class);
     }
 }
