@@ -66,7 +66,7 @@ public class MutationTests {
     @Order(2)
     @DisplayName("Should update a todo.")
     void testUpdateTodo() throws IOException {
-        final var input = UpdateTodoInput.builder().title("1234").id(newTodoRecordId).build();
+        final var input = UpdateTodoInput.builder().title("1234").id(newTodoRecordId).done(true).build();
         final var params = objectMapper.createObjectNode();
         // THEN - assert the response of GraphQL.
         params.set("input", objectMapper.valueToTree(input));
@@ -75,6 +75,8 @@ public class MutationTests {
                 .assertThatField("$.data.updateTodo.id").asInteger().isEqualTo(input.getId().longValue())
                 .and()
                 .assertThatField("$.data.updateTodo.title").as(String.class).isEqualTo(input.getTitle())
+                .and()
+                .assertThatField("$.data.updateTodo.done").asBoolean().isEqualTo(input.getDone())
                 .and()
                 .getRawResponse()
                 .toString();
