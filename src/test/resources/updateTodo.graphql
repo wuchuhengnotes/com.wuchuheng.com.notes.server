@@ -1,0 +1,6 @@
+mutation UPDATE_TODO($input: InputUpdateTodoInput!){
+    updateTodo(input:$input) {
+        id
+        title
+    }
+}
