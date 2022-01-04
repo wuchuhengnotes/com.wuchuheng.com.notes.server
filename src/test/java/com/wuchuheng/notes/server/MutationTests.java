@@ -35,6 +35,8 @@ public class MutationTests {
 
     @Autowired private ObjectMapper objectMapper;
 
+    private static Long newTodoRecordId;
+
     @Test
     @Order(1)
     @DisplayName("Should create a todo.")
@@ -57,14 +59,13 @@ public class MutationTests {
         assertThat(persistenceTodo.get().getId())
                 .as("Should create only one todo.")
                 .isEqualTo(Long.valueOf(id));
-        CacheManager.setNewTodoRecordId(Long.valueOf(id));
+        newTodoRecordId = Long.valueOf(id);
     }
 
     @Test
     @Order(2)
     @DisplayName("Should update a todo.")
     void testUpdateTodo() throws IOException {
-        final var newTodoRecordId = CacheManager.getNewTodoRecordId();
         final var input = UpdateTodoInput.builder().title("1234").id(newTodoRecordId).build();
         final var params = objectMapper.createObjectNode();
         // THEN - assert the response of GraphQL.
