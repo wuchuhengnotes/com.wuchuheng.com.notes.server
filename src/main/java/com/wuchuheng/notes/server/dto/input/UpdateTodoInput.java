@@ -9,22 +9,23 @@
 package com.wuchuheng.notes.server.dto.input;
 
 import com.wuchuheng.notes.server.validators.HasTodoID.HasTodoID;
-import graphql.annotations.annotationTypes.GraphQLConstructor;
-import graphql.annotations.annotationTypes.GraphQLDescription;
-import graphql.annotations.annotationTypes.GraphQLField;
-import graphql.annotations.annotationTypes.GraphQLNonNull;
+import com.wuchuheng.notes.server.validators.OneNotNull.OneNotNull;
+import graphql.annotations.annotationTypes.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @NoArgsConstructor
 @AllArgsConstructor(onConstructor_ = @GraphQLConstructor)
 @GraphQLDescription("The input for updating Todo.")
 @Data
 @Builder
+@OneNotNull(fields = {"title", "done"})
 public class UpdateTodoInput {
     @GraphQLField
     @GraphQLNonNull
@@ -33,8 +34,11 @@ public class UpdateTodoInput {
     private Long id;
 
     @GraphQLField
-    @GraphQLNonNull
     @GraphQLDescription("The title for creating todo")
-    @NotBlank(message = "The title can not be empty.")
+    @Length(min = 1, message = "The length of title must be at least one ")
     private String title;
+
+    @GraphQLField
+    @GraphQLDescription("Mark if done.")
+    private Boolean done;
 }

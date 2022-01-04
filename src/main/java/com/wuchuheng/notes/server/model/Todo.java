@@ -41,6 +41,7 @@ public class Todo {
     @GraphQLField
     @GraphQLNonNull
     @NotNull
+    @GraphQLDescription("Mark if done.")
     private Boolean isDone;
 
     @Column(columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")

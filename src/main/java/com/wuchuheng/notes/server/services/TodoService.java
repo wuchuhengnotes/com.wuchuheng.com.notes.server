@@ -18,7 +18,6 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
-import java.util.Optional;
 
 @Service
 @Validated
@@ -40,7 +39,13 @@ public class TodoService {
 
     public Todo updateTodo(@Valid UpdateTodoInput input) {
         final Todo todo = this.todoRepository.findById(input.getId().longValue());
-        todo.setTitle(input.getTitle());
+        if (input.getTitle() != null) {
+            todo.setTitle(input.getTitle());
+        }
+        if (input.getDone() != null) {
+            todo.setIsDone(input.getDone());
+            todo.setDoneAt(LocalDate.now());
+        }
         this.todoRepository.save(todo);
 
         return todo;
