@@ -10,7 +10,6 @@ package com.wuchuheng.notes.server.resolvers;
 
 import com.wuchuheng.notes.server.model.Todo;
 import com.wuchuheng.notes.server.repository.TodoRepository;
-import com.wuchuheng.notes.server.services.TodoService;
 import graphql.annotations.annotationTypes.GraphQLDescription;
 import graphql.annotations.annotationTypes.GraphQLField;
 import graphql.annotations.annotationTypes.GraphQLNonNull;

@@ -28,38 +28,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Slf4j
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class MutationTests {
-    @Autowired private GraphQLTestTemplate graphQLTestTemplate;
-
-    @Autowired private TodoRepository todoRepository;
-
-    @Autowired private ObjectMapper objectMapper;
-
-    private static Long newTodoRecordId;
+public class MutationTests extends BaseTests{
 
     @Test
     @Order(1)
     @DisplayName("Should create a todo.")
+    @Override
     void testCreateTodo() throws IOException {
-        final ObjectNode params = objectMapper.createObjectNode();
-        final var title = "hello";
-        final var input = CreateTodoInput.builder()
-                .title(title)
-                .build();
-        params.set("input", objectMapper.valueToTree(input));
-        log.info("Create Todo variables: {}", params);
-        var id = graphQLTestTemplate.perform("createTodo.graphql", params)
-                .assertThatNoErrorsArePresent()
-                .assertThatField("$.data.createTodo.title")
-                .as(String.class)
-                .isEqualTo(title)
-                .and()
-                .get("$.data.createTodo.id");
-        var persistenceTodo = this.todoRepository.findById(Long.valueOf(id));
-        assertThat(persistenceTodo.get().getId())
-                .as("Should create only one todo.")
-                .isEqualTo(Long.valueOf(id));
-        newTodoRecordId = Long.valueOf(id);
+        super.testCreateTodo();
     }
 
     @Test
