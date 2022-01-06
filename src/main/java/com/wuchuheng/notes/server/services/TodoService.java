@@ -25,6 +25,8 @@ import java.time.LocalDate;
 public class TodoService {
     private final TodoRepository todoRepository;
 
+    private final TodosDataFetcherService todosDataFetcherService;
+
     public Todo createTodo(@Valid CreateTodoInput input) {
         var todoRecord = this.todoRepository.save(
                 Todo.builder()
@@ -33,6 +35,7 @@ public class TodoService {
                         .createdAt(LocalDate.now())
                         .build()
         );
+        this.todosDataFetcherService.publish(todoRepository.findAll());
 
         return todoRecord;
     }
@@ -47,6 +50,7 @@ public class TodoService {
             todo.setDoneAt(LocalDate.now());
         }
         this.todoRepository.save(todo);
+        this.todosDataFetcherService.publish(todoRepository.findAll());
 
         return todo;
     }

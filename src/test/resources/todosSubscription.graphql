@@ -1,0 +1,9 @@
+subscription {
+    todos{
+        id
+        title
+        done
+        doneAt
+        createdAt
+    }
+}
