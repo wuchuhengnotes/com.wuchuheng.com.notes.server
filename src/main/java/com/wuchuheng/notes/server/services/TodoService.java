@@ -10,6 +10,7 @@ package com.wuchuheng.notes.server.services;
 
 import com.wuchuheng.notes.server.dto.input.CreateTodoInput;
 import com.wuchuheng.notes.server.dto.input.UpdateTodoInput;
+import com.wuchuheng.notes.server.exception.GraphQLException;
 import com.wuchuheng.notes.server.model.Todo;
 import com.wuchuheng.notes.server.repository.TodoRepository;
 import lombok.RequiredArgsConstructor;
