@@ -39,7 +39,7 @@ public class QueryResolver implements ApplicationContextAware {
     @GraphQLNonNull
     @GraphQLDescription("Returns all todos.")
     public static Iterable<Todo> todos() {
-        return todoRepository.findAll();
+        return todoRepository.findAllNotDoneTodo();
     }
 
     @Override

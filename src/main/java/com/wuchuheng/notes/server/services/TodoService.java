@@ -36,7 +36,7 @@ public class TodoService {
                         .createdAt(LocalDate.now())
                         .build()
         );
-        this.todosDataFetcherService.publish(todoRepository.findAll());
+        this.todosDataFetcherService.publish(todoRepository.findAllNotDoneTodo());
 
         return todoRecord;
     }
@@ -51,7 +51,7 @@ public class TodoService {
             todo.setDoneAt(LocalDate.now());
         }
         this.todoRepository.save(todo);
-        this.todosDataFetcherService.publish(todoRepository.findAll());
+        this.todosDataFetcherService.publish(todoRepository.findAllNotDoneTodo());
 
         return todo;
     }
