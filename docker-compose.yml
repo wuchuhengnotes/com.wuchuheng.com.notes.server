@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   server:
-    image: notes_server_wuchuheng_com:0.0.1
+    image: wuchuheng/notes_server_wuchuheng_com:0.0.1
     build:
       context: .
       dockerfile: Dockerfile
